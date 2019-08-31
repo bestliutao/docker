@@ -1,0 +1,13 @@
+docker overlay2 空间占满100%时，处理方法
+原文: https://unix.stackexchange.com/questions/414483/docker-increase-available-disk-space
+跟换overlay2目录地址：
+You could move the docker directory to somewhere under /home and create a symlink /var/lib/docker pointing to the new location. For example:
+
+shut down docker first
+mv /var/lib/docker /home/
+ln -s /home/docker/ /var/lib/
+
+restart docker now
+Use another directory if /home/docker already exists.
+
+Instead of, or as well as, the symlink from /var/lib/docker -> /home/docker, you could also reconfigure docker so that it expects to find its directory under /home rather than /var/lib.
